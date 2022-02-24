@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { Item } from "./Item";
 export function TodoList() {
   const [item, setItem] = useState("");
   const [list, setList] = useState([]);
@@ -12,36 +13,38 @@ export function TodoList() {
     setItem(e.target.value);
   };
 
-  const onSubmit = () => {
+  const onInsert = () => {
     if (!item) {
       return;
     }
-
     const newItem = {
       id: itemId.current,
       value: item,
       // checked: false,
     };
-
     setList(list.concat(newItem));
     setItem("");
     inputRef.current.focus();
     itemId.current += 1;
   };
+
   const onEnter = e => {
     if (e.key === "Enter") {
-      onSubmit();
+      onInsert();
     }
   };
+
+  const onRemove = (item) => {
+    const newList = list.filter((data) => data.id !== item.id);
+    setList(newList);
+  }
+
+
 
   return (
     <Wrapper>
       <Title>Todo List</Title>
-      <ItemList>
-        {list.map(data => (
-          <Item key={data.id}>{data.value}</Item>
-        ))}
-      </ItemList>
+      <Item list={list} onRemove={onRemove}/>
       <Input
         placeholder="입력해주세요"
         onChange={onChange}
@@ -49,9 +52,9 @@ export function TodoList() {
         value={item}
         ref={inputRef}
       />
-      <SubmitButton onClick={() => onSubmit()}>
+      <InsertButton onClick={() => onInsert()}>
         <FontAwesomeIcon icon={faPaperPlane} color="white" size="2x" />
-      </SubmitButton>
+      </InsertButton>
     </Wrapper>
   );
 }
@@ -74,22 +77,6 @@ const Title = styled.div`
   border-radius: 40px 40px 0 0;
 `;
 
-const ItemList = styled.div`
-  width: 500px;
-  height: 400px;
-  background-color: #e2daff;
-  padding: 10px;
-  box-sizing: border-box;
-  overflow-y: scroll;
-  ::-webkit-scrollbar {
-    opacity: 0;
-  }
-`;
-
-const Item = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const Input = styled.input`
   width: 500px;
@@ -104,7 +91,7 @@ const Input = styled.input`
   }
 `;
 
-const SubmitButton = styled.button`
+const InsertButton = styled.button`
   width: 500px;
   height: 50px;
   background: linear-gradient(250deg, #8edff5, #3861e8);
