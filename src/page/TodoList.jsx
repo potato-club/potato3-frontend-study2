@@ -2,27 +2,51 @@ import React from "react";
 import styled from "@emotion/styled";
 import "./TodoList.css";
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import ListItem from "./ListItem";
 
 const TodoList = () => {
-  const [text, settext] = useState("ds");
+  const [list, setlist] = useState([]);
+  const [text, settext] = useState("");
 
+  const addList = () => {
+    let helper = [...list];
+    helper.push(text);
+    setlist(helper);
+    settext("");
+  };
+
+  const allDeleteList = () => {
+    setlist([]);
+  };
   return (
     <Every>
       <Wrapper>
-        <Header>ToDo List</Header>
+        <Header>
+          ToDo List
+          <button onClick={allDeleteList} className="reset">
+            리셋
+          </button>
+        </Header>
         <List>
-          <ul>
-            <li>{text} <FontAwesomeIcon icon={faTrash} className="trash" /></li>
-          </ul>
+          <ListItem list={list} />
         </List>
-        <Content>
-          <input type={text}></input>
+        <Content className="content">
+          <input
+            onChange={(e) => {
+              settext(e.target.value);
+            }}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                {
+                  addList();
+                  settext("");
+                }
+              }
+            }}
+            value={text}
+          ></input>
         </Content>
-        <Footer>
-          확인
-        </Footer>
+        <Footer onClick={addList}>확인</Footer>
       </Wrapper>
     </Every>
   );
@@ -40,12 +64,14 @@ const Every = styled.div`
   background-color: skyblue;
   border-radius: 10%;
 `;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 const Header = styled.div`
+  position: relative;
   text-align: center;
   height: 45px;
   line-height: 45px;
@@ -60,6 +86,7 @@ const List = styled.div`
   height: 445px;
   font-family: monospace;
   background-color: rgb(217, 245, 244);
+  overflow-y: scroll;
 `;
 
 const Content = styled.div`
