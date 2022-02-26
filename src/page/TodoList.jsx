@@ -19,19 +19,21 @@ const TodoList = () => {
     setlist([]);
   };
 
-  
+  const deleteList = (key) => {
+    setlist(list.filter((element, index) => index !== key));
+  };
   return (
     <Every>
       <Wrapper>
         <Header>
           ToDo List
-          <button onClick={allDeleteList} className="reset">
+          <Reset onClick={allDeleteList} className="reset">
             리셋
-          </button>
+          </Reset>
         </Header>
-        <List list={list} />
+        <List list={list} deleteList={deleteList} />
         <Content className="content">
-          <input
+          <Input
             onChange={(e) => {
               settext(e.target.value);
             }}
@@ -44,7 +46,7 @@ const TodoList = () => {
               }
             }}
             value={text}
-          ></input>
+          ></Input>
         </Content>
         <Footer onClick={addList}>확인</Footer>
       </Wrapper>
@@ -95,4 +97,16 @@ const Footer = styled.button`
   font-family: monospace;
   color: white;
   font-size: 15px;
+`;
+
+const Reset = styled.button`
+  position: absolute;
+  right: 20px;
+  top: 12px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 100%;
+  border: none;
 `;

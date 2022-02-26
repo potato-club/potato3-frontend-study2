@@ -2,9 +2,13 @@ import React from "react";
 import ListItem from "./ListItem";
 import styled from "@emotion/styled";
 
-const List = ({ list }) => {
+const List = ({ list, deleteList}) => {
   let newList = list.map((element, index) => (
-    <ListItem list={list} key={index} value={element}></ListItem>
+    <ListItem
+      key={index}
+      value={element}
+      deleteList={deleteList}
+    ></ListItem>
   ));
   return (
     <ListWrap>
