@@ -5,26 +5,26 @@ import { useState } from "react";
 import List from "./List";
 
 const TodoList = () => {
-  const [list, setlist] = useState([]);
-  const [text, settext] = useState("");
+  const [list, setList] = useState([]);
+  const [text, setText] = useState("");
 
   const addList = () => {
     let helper = [...list];
     helper.push(text);
-    setlist(helper);
-    settext("");
+    setList(helper);
+    setText("");
   };
 
   const allDeleteList = () => {
-    setlist([]);
+    setList([]);
   };
 
   const deleteList = (key) => {
-    setlist(list.filter((element, index) => index !== key));
+    setList(list.filter((element, index) => index !== key));
   };
-  
+
   return (
-    <Every>
+    <Container>
       <Wrapper>
         <Header>
           ToDo List
@@ -36,26 +36,23 @@ const TodoList = () => {
         <Content className="content">
           <Input
             onChange={(e) => {
-              settext(e.target.value);
+              setText(e.target.value);
             }}
             onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                  addList();
-                  settext("");
-              }
+              e.key === "Enter" && addList();
             }}
             value={text}
-          ></Input>
+          />
         </Content>
         <Footer onClick={addList}>확인</Footer>
       </Wrapper>
-    </Every>
+    </Container>
   );
 };
 
 export default TodoList;
 
-const Every = styled.div`
+const Container = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
