@@ -22,29 +22,30 @@ export function TodoList() {
       value: item,
       checked: false,
     };
+    
     setList(list.concat(newItem));
     setItem("");
     inputRef.current.focus();
-    itemId.current += 1;
+    itemId.current++;
   };
 
-  const onEnter = e => {
-    if (e.key === "Enter") {
-      onInsert();
-    }
+  // const onEnter = e => {
+  //   if (e.key === "Enter") {
+  //     onInsert();
+  //   }
+  // };
+
+  const onRemove = id => {
+    const newList = list.filter(data => data.id !== id);
+    setList(newList);
   };
 
-  const onRemove = (id) => {
-    const newList = list.filter((data) => data.id !== id);
+  const onToggle = id => {
+    const newList = list.map(data =>
+      data.id === id ? { ...data, checked: !data.checked } : data
+    );
     setList(newList);
-  }
-
-  const onToggle = (id) => {
-    const newList = list.map((data) => data.id === id ? {...data, checked: !data.checked} : data);
-    setList(newList);
-  }
-
-
+  };
 
   return (
     <Wrapper>
@@ -53,7 +54,11 @@ export function TodoList() {
       <Input
         placeholder="입력해주세요"
         onChange={onChange}
-        onKeyPress={onEnter}
+        // onKeyPress={onEnter}
+        // onKeyPress={(e)=>e.key === "Enter" ? onInsert() : ""}
+        onKeyPress={e => {
+          e.key === "Enter" && onInsert();
+        }} // ★★★★★
         value={item}
         ref={inputRef}
       />
@@ -84,7 +89,6 @@ const Title = styled.div`
   font-weight: 500;
   border-radius: 40px 40px 0 0;
 `;
-
 
 const Input = styled.input`
   width: 500px;
