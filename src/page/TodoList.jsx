@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import "./TodoList.css";
 import { useState } from "react";
-import ListItem from "./ListItem";
 
 const TodoList = () => {
   const [list, setlist] = useState([]);
@@ -27,9 +26,7 @@ const TodoList = () => {
             리셋
           </button>
         </Header>
-        <List>
-          <ListItem list={list} />
-        </List>
+        <List list={list} />
         <Content className="content">
           <input
             onChange={(e) => {
