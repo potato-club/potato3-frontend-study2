@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ListItem = ({ list, key, value }) => {
-  const deleteList = (e) => {
-    const newList = list.filter((element) => element.key !== e.key);
+  const deleteList = () => {
+    const newList = list.filter((element) => element.key !== key);
 
   };
   return (
     <li>
-      {{ value }}
+      { value }
       <FontAwesomeIcon icon={faTrash} className="trash" onClick={deleteList} />
     </li>
   );

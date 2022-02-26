@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import "./TodoList.css";
 import { useState } from "react";
+import List from "./List";
 
 const TodoList = () => {
   const [list, setlist] = useState([]);
@@ -17,6 +18,8 @@ const TodoList = () => {
   const allDeleteList = () => {
     setlist([]);
   };
+
+  
   return (
     <Every>
       <Wrapper>
@@ -77,13 +80,6 @@ const Header = styled.div`
   font-size: 35px;
   background-color: steelblue;
   border-radius: 15px 15px 0 0;
-`;
-
-const List = styled.div`
-  height: 445px;
-  font-family: monospace;
-  background-color: rgb(217, 245, 244);
-  overflow-y: scroll;
 `;
 
 const Content = styled.div`
