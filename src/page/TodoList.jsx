@@ -22,6 +22,7 @@ const TodoList = () => {
   const deleteList = (key) => {
     setlist(list.filter((element, index) => index !== key));
   };
+  
   return (
     <Every>
       <Wrapper>
@@ -39,10 +40,8 @@ const TodoList = () => {
             }}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
-                {
                   addList();
                   settext("");
-                }
               }
             }}
             value={text}

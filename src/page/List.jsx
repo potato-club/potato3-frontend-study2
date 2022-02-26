@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 const List = ({ list, deleteList}) => {
   let newList = list.map((element, index) => (
     <ListItem
-      key={index}
+      itemIndex={index}
       value={element}
       deleteList={deleteList}
     ></ListItem>
