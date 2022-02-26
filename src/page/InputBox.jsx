@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { MdFingerprint } from "react-icons/md";
+import { BsCalendar2Check } from "react-icons/bs";
 
-export default function TodoInsert() {
+export default function InputBox(onInsertTodo) {
+  const [value, setValue] = useState("");
+  const onChange = (e) => {
+    setValue(e.target.value);
+  };
+  const onSubmit = () => {
+    onInsertTodo(value);
+    setValue("");
+  };
+
   return (
     <>
-      <Container>
-        <PlaceHolder placeholder="할일을 적으시오."></PlaceHolder>
-        <PushI type="submit">
-          <MdFingerprint />
+      <Container onSubmit={onSubmit}>
+        <PlaceHolder
+          placeholder="할일을 적으시오."
+          value={value}
+          onChange={onChange}
+        ></PlaceHolder>
+        <PushI type="submit" onClick={onSubmit}>
+          <BsCalendar2Check />
         </PushI>
       </Container>
     </>
