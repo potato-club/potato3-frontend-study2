@@ -27,18 +27,14 @@ export default function App() {
   ]);
 
   const onInsertTodo = (text) => {
-    if (text === "") {
-      return alert("할일을 입력하세요");
-    } else {
-      const pushTodo = {
-        id: nextId,
-        text,
-        checked: false,
-      };
+    const pushTodo = {
+      id: nextId,
+      text,
+      checked: false,
+    };
 
-      setTodos((todos) => todos.concat(pushTodo));
-      nextId++;
-    }
+    setTodos((todos) => todos.concat(pushTodo));
+    nextId++;
   };
   return (
     <>

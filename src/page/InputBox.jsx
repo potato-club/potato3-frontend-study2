@@ -2,25 +2,29 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BsCalendar2Check } from "react-icons/bs";
 
-export default function InputBox(onInsertTodo) {
+export default function InputBox({ onInsertTodo }) {
   const [value, setValue] = useState("");
   const onChange = (e) => {
     setValue(e.target.value);
   };
   const onSubmit = () => {
-    onInsertTodo(value);
-    setValue("");
+    if (value === "") {
+      return alert("할일을 입력하세요");
+    } else {
+      onInsertTodo(value);
+      setValue("");
+    }
   };
 
   return (
     <>
-      <Container onSubmit={onSubmit}>
+      <Container>
         <PlaceHolder
           placeholder="할일을 적으시오."
           value={value}
           onChange={onChange}
         ></PlaceHolder>
-        <PushI type="submit" onClick={onSubmit}>
+        <PushI type="button" onClick={onSubmit}>
           <BsCalendar2Check />
         </PushI>
       </Container>
