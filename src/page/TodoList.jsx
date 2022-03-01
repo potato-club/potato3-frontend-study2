@@ -1,11 +1,20 @@
 import styled from "@emotion/styled";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { ListItem } from "./ListItem";
+import Modal from "react-modal";
+import { WarningModal } from './WarningModal';
+
 export function TodoList() {
   const [item, setItem] = useState("");
   const [list, setList] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    Modal.setAppElement("#root");
+  }, [modalIsOpen]);
+
   const itemId = useRef(0);
   const inputRef = useRef(null);
 
@@ -15,6 +24,7 @@ export function TodoList() {
 
   const onInsert = () => {
     if (!item) {
+      setModalIsOpen(true);
       return;
     }
     const newItem = {
@@ -22,7 +32,7 @@ export function TodoList() {
       value: item,
       checked: false,
     };
-    
+
     setList(list.concat(newItem));
     setItem("");
     inputRef.current.focus();
@@ -68,6 +78,7 @@ export function TodoList() {
       <AllRemoveButton onClick={() => setList([])}>
         리스트 전체삭제
       </AllRemoveButton>
+      <WarningModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>
     </Wrapper>
   );
 }
@@ -114,6 +125,7 @@ const InsertButton = styled.button`
     transform: scale(0.99);
     /* box-shadow: 2px 2px 0 #000000; */
   }
+  border-radius: 0 0 40px 40px;
 `;
 
 const AllRemoveButton = styled.button`
@@ -124,8 +136,9 @@ const AllRemoveButton = styled.button`
   background-color: #dbb3b3;
   border-radius: 10px;
   cursor: pointer;
-  cursor: pointer;
   :active {
     transform: scale(0.99);
   }
 `;
+
+
