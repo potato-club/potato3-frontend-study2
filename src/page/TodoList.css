@@ -4,17 +4,18 @@
   box-sizing: border-box;
 }
 
-ul {
-  list-style: none;
-  padding: 10px 10px;
-  position: relative;
-}
-
-li {
-  padding: 10px 10px;
-}
-
 .trash {
   position: absolute;
   right: 30px;
+}
+
+.deleteModal {
+  position: absolute;
+  right: -9px;
+  bottom: 45px;
+  font-size: 29px;
+}
+
+.deleteModal:hover {
+  color:lightslategray;
 }

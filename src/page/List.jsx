@@ -5,11 +5,16 @@ import styled from "@emotion/styled";
 const List = ({ list, deleteList }) => {
   return (
     <ListWrap>
-      <ul>
+      <ListUl>
         {list.map((element, index) => (
-          <ListItem itemIndex={index} value={element} deleteList={deleteList} />
+          <ListItem
+            key={index}
+            itemIndex={index}
+            value={element}
+            deleteList={deleteList}
+          />
         ))}
-      </ul>
+      </ListUl>
     </ListWrap>
   );
 };
@@ -21,4 +26,10 @@ const ListWrap = styled.div`
   font-family: monospace;
   background-color: rgb(217, 245, 244);
   overflow-y: scroll;
+`;
+
+const ListUl = styled.ul`
+  list-style: none;
+  padding: 10px 10px;
+  position: relative;
 `;

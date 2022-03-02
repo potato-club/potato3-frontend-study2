@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "@emotion/styled";
 import "./TodoList.css";
 import { useState } from "react";
 import List from "./List";
+import Modal from "react-modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const TodoList = () => {
   const [list, setList] = useState([]);
   const [text, setText] = useState("");
+  const inputRef = useRef(null);
+  const [modalIsopen, setModalIsopen] = useState(false);
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      transform: "translate(-50%, -50%)",
+      overflow: "visible",
+    },
+  };
 
   const addList = () => {
     let helper = [...list];
     helper.push(text);
     setList(helper);
     setText("");
+    inputRef.current.focus();
+    text === "" && setModalIsopen(true);
   };
 
   const allDeleteList = () => {
@@ -42,9 +59,23 @@ const TodoList = () => {
               e.key === "Enter" && addList();
             }}
             value={text}
+            ref={inputRef}
           />
         </Content>
         <Footer onClick={addList}>확인</Footer>
+        <Modal
+          isOpen={modalIsopen}
+          style={customStyles}
+          onRequestClose={() => setModalIsopen(false)}
+          shouldCloseOnOverlayClick={false}
+        >
+          내용을 입력해주세요 !!
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={() => setModalIsopen(false)}
+            className="deleteModal"
+          />
+        </Modal>
       </Wrapper>
     </Container>
   );
