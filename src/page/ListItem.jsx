@@ -2,8 +2,11 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import ListState from '../state/ListState';
+import { useRecoilValue } from "recoil";
 
-export function ListItem({ list, onRemove, onToggle }) {
+export function ListItem({ onRemove, onToggle }) {
+  const list = useRecoilValue(ListState);
   return (
     <ItemList>
       {list.map(data => (

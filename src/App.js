@@ -1,11 +1,13 @@
 import './App.css';
 import styled from "@emotion/styled";
 import { TodoList } from "./page/TodoList";
-
+import { RecoilRoot } from 'recoil';
 function App() {
   return (
     <Wrapper>
-      <TodoList />
+      <RecoilRoot>
+        <TodoList />
+      </RecoilRoot>
     </Wrapper>
   );
 }

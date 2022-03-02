@@ -4,11 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { ListItem } from "./ListItem";
 import Modal from "react-modal";
-import { WarningModal } from './WarningModal';
+import { WarningModal } from "./WarningModal";
+import ListState from '../state/ListState';
+import { useRecoilState } from "recoil";
+
 
 export function TodoList() {
   const [item, setItem] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useRecoilState(ListState);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
@@ -27,13 +30,23 @@ export function TodoList() {
       setModalIsOpen(true);
       return;
     }
-    const newItem = {
-      id: itemId.current,
-      value: item,
-      checked: false,
-    };
 
-    setList(list.concat(newItem));
+    // const newItem = {
+    //   id: itemId.current,
+    //   value: item,
+    //   checked: false,
+    // };
+    // setList(list.concat(newItem));
+
+    // 위 코드와 같음
+    setList((list) => [
+      ...list,
+      {
+        id: itemId.current,
+        value: item,
+        checked: false,
+      }
+    ])
     setItem("");
     inputRef.current.focus();
     itemId.current++;
@@ -60,12 +73,12 @@ export function TodoList() {
   return (
     <Wrapper>
       <Title>Todo List</Title>
-      <ListItem list={list} onRemove={onRemove} onToggle={onToggle} />
+      <ListItem onRemove={onRemove} onToggle={onToggle} />
       <Input
         placeholder="입력해주세요"
         onChange={onChange}
-        // onKeyPress={onEnter}
-        // onKeyPress={(e)=>e.key === "Enter" ? onInsert() : ""}
+        // onKeyPress={(e) => onEnter}
+        // onKeyPress={(e) => e.key === "Enter" ? onInsert() : ""}
         onKeyPress={e => {
           e.key === "Enter" && onInsert();
         }} // ★★★★★
@@ -76,9 +89,10 @@ export function TodoList() {
         <FontAwesomeIcon icon={faPaperPlane} color="white" size="2x" />
       </InsertButton>
       <AllRemoveButton onClick={() => setList([])}>
+        {/* setList([]) 대신에, useResetRecoilState(ListState) 를 선언하고, 그 함수를 실행해도 됨. */}
         리스트 전체삭제
       </AllRemoveButton>
-      <WarningModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>
+      <WarningModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
     </Wrapper>
   );
 }
@@ -140,5 +154,3 @@ const AllRemoveButton = styled.button`
     transform: scale(0.99);
   }
 `;
-
-
