@@ -5,7 +5,7 @@ export default function TodoTemplate({ children }) {
   return (
     <>
       <TodoBG>
-        <Title>To do list</Title>
+        <Title>To Do List</Title>
         <Contents>{children}</Contents>
       </TodoBG>
     </>

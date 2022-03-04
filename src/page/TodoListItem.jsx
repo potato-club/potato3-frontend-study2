@@ -7,37 +7,35 @@ import { BsCheck2Circle } from "react-icons/bs";
 //import { TiDeleteOutline } from "react-icons/ti";
 
 export default function TodoListItem({ todo }) {
-  const { text, checked } = todo;
+  const { id, text, checked } = todo;
 
   return (
-    <TodoListItemBG>
-      <CheckBox>
-        {checked ? <BsCheck2Circle /> : <BsCircle />}
-        <Text>{text}</Text>
-      </CheckBox>
-      <Remove>
-        <TiDelete />
-      </Remove>
-    </TodoListItemBG>
+    <ItemWrapper>
+      <CheckBox>{checked ? <BsCheck2Circle /> : <BsCircle />}</CheckBox>
+      <Text
+        style={{
+          textDecoration: checked ? "line-through" : null,
+          color: checked ? "#ccc" : "#000",
+        }}
+      >
+        {text}
+      </Text>
+      {/* <Remove onClick={() => onRemove(id)}> */}
+      <TiDelete />
+    </ItemWrapper>
   );
 }
 
-const TodoListItemBG = styled.div`
+const ItemWrapper = styled.div`
   padding: 1rem;
   display: flex;
   align-items: center;
   background: white;
+  justify-content: space-between;
 `;
 const CheckBox = styled.div`
   cursor: pointer;
-  display: flex;
-  flex: 1;
 `;
 const Text = styled.div`
-  display: flex;
-  flex: 1;
-  margin-left: 10px;
-`;
-const Remove = styled.div`
-  cursor: pointer;
+  text-decoration: ;
 `;

@@ -4,10 +4,13 @@ import { BsCalendar2Check } from "react-icons/bs";
 
 export default function InputBox({ onInsertTodo }) {
   const [value, setValue] = useState("");
+
   const onChange = (e) => {
     setValue(e.target.value);
   };
-  const onSubmit = () => {
+
+  const onSubmit = (e) => {
+    //e.preventDefualt();
     if (value === "") {
       return alert("할일을 입력하세요");
     } else {
@@ -16,17 +19,25 @@ export default function InputBox({ onInsertTodo }) {
     }
   };
 
+  // const onKeySubmit = (e) => {
+  //   if (e.key === "Enter") {
+  //     onSubmit();
+  //   }
+  // };
+
   return (
     <>
       <Container>
         <PlaceHolder
+          type="text"
           placeholder="할일을 적으시오."
           value={value}
           onChange={onChange}
-        ></PlaceHolder>
-        <PushI type="button" onClick={onSubmit}>
+          autoFocus
+        />
+        <PushButton type="button" onClick={onSubmit}>
           <BsCalendar2Check />
-        </PushI>
+        </PushButton>
       </Container>
     </>
   );
@@ -47,7 +58,7 @@ const PlaceHolder = styled.input`
   flex: 1;
 `;
 
-const PushI = styled.button`
+const PushButton = styled.button`
   background: none;
   outline: none;
   border: 1px solid black;

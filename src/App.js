@@ -1,41 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import TodoTamplate from "./page/TodoTamplate";
 import InputBox from "./page/InputBox";
 import TodoList from "./page/TodoList";
-
-let nextId = 4;
+// import TodoListItem from "./page/TodoListItem";
 
 export default function App() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: "첫번째",
-      checked: false,
-    },
-    {
-      id: 2,
-      text: "두번째",
-      checked: false,
-    },
-    {
-      id: 3,
-      text: "세번째",
-      checked: false,
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
+
+  const nextId = useRef(0);
 
   const onInsertTodo = (text) => {
     const pushTodo = {
-      id: nextId,
+      id: nextId.current,
       text,
       checked: false,
     };
-
     setTodos((todos) => todos.concat(pushTodo));
-    nextId++;
+    nextId.current++;
   };
+
   return (
     <>
       <GlobalStyle />
