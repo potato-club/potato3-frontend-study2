@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export const Header = () => {
+  return <Container>ToDo List</Container>;
+};
+
 const Container = styled.div`
   background: linear-gradient(
     90deg,
@@ -12,7 +16,3 @@ const Container = styled.div`
   color: white;
   padding: 1rem;
 `;
-
-export const Header = () => {
-  return <Container>ToDo List</Container>;
-};

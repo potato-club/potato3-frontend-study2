@@ -1,8 +1,26 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { Header } from '../components/Header';
 import { TodoInput } from '../components/TodoInput';
 import { TodoItem } from '../components/TodoItem';
+import { todoListState } from './../recoil/todoList';
+
+export const TodoList = () => {
+  const todoList = useRecoilValue(todoListState);
+
+  return (
+    <Container>
+      <Header />
+      <ItemsWraper>
+        {todoList.map((todo) => (
+          <TodoItem key={todo.id} data={todo} />
+        ))}
+      </ItemsWraper>
+      <TodoInput />
+    </Container>
+  );
+};
 
 const Container = styled.div`
   display: flex;
@@ -16,32 +34,5 @@ const ItemsWraper = styled.div`
   flex: 1;
   padding: 1rem;
   background-color: #f3fdfc;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
-
-export const TodoList = () => {
-  const [todoData, setTodoData] = useState([]);
-  const nextId = useRef(0);
-
-  return (
-    <Container>
-      <Header />
-      <ItemsWraper>
-        {todoData.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            text={todo.text}
-            onDelete={() => {
-              setTodoData(todoData.filter((value) => value.id !== todo.id));
-            }}
-          />
-        ))}
-      </ItemsWraper>
-      <TodoInput
-        onSubmit={(value) => {
-          setTodoData(todoData.concat({ id: nextId.current++, text: value }));
-        }}
-      />
-    </Container>
-  );
-};
