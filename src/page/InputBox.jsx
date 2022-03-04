@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { BsCalendar2Check } from "react-icons/bs";
+import { GrPowerReset } from "react-icons/gr";
 
 export default function InputBox({ onInsertTodo }) {
   const [value, setValue] = useState("");
@@ -35,6 +36,9 @@ export default function InputBox({ onInsertTodo }) {
           onChange={onChange}
           autoFocus
         />
+        <ResetButton>
+          <GrPowerReset />
+        </ResetButton>
         <PushButton type="button" onClick={onSubmit}>
           <BsCalendar2Check />
         </PushButton>
@@ -56,6 +60,20 @@ const PlaceHolder = styled.input`
   font-size: 1.125 rem;
   line-height: 1.5;
   flex: 1;
+`;
+
+const ResetButton = styled.div`
+background: none;
+  outline: none;
+  border: 1px solid black;
+  background : none;
+  padding-left: 1rem;
+  padding-right : 1rem;
+  font-size: 1.5 rem;
+  display:flex;
+  align-items: center;
+  cursor : pointer;
+  transition 0.1 background ease-in;
 `;
 
 const PushButton = styled.button`

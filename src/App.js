@@ -4,11 +4,10 @@ import { createGlobalStyle } from "styled-components";
 import TodoTamplate from "./page/TodoTamplate";
 import InputBox from "./page/InputBox";
 import TodoList from "./page/TodoList";
-// import TodoListItem from "./page/TodoListItem";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-
+  console.log(todos);
   const nextId = useRef(0);
 
   const onInsertTodo = (text) => {
@@ -25,12 +24,23 @@ export default function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const onCheck = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          todo.checked = !todo.checked;
+        }
+        return todo;
+      })
+    );
+  };
+
   return (
     <>
       <GlobalStyle />
       <TodoTamplate>
         <InputBox onInsertTodo={onInsertTodo} />
-        <TodoList todos={todos} onRemove={onRemove} />
+        <TodoList todos={todos} onRemove={onRemove} onCheck={onCheck} />
       </TodoTamplate>
     </>
   );

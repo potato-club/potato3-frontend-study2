@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { TiDelete } from "react-icons/ti";
 import { BsCircle } from "react-icons/bs";
 import { BsCheck2Circle } from "react-icons/bs";
-//import { BsCheckLg } from "react-icons/bs";
-//import { TiDeleteOutline } from "react-icons/ti";
 
-export default function TodoListItem({ todo, onRemove }) {
+export default function TodoListItem({ todo, onRemove, onCheck }) {
   const { id, text, checked } = todo;
 
   return (
     <ItemWrapper>
-      <CheckBox>{checked ? <BsCheck2Circle /> : <BsCircle />}</CheckBox>
+      <CheckBox
+        onClick={() => {
+          onCheck(id);
+        }}
+      >
+        {checked ? <BsCheck2Circle /> : <BsCircle />}
+      </CheckBox>
       <Text
         style={{
           textDecoration: checked ? "line-through" : null,
