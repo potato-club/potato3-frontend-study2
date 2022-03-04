@@ -21,12 +21,16 @@ export default function App() {
     nextId.current++;
   };
 
+  const onRemove = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <>
       <GlobalStyle />
       <TodoTamplate>
         <InputBox onInsertTodo={onInsertTodo} />
-        <TodoList todos={todos} />
+        <TodoList todos={todos} onRemove={onRemove} />
       </TodoTamplate>
     </>
   );

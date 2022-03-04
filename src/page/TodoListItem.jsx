@@ -6,7 +6,7 @@ import { BsCheck2Circle } from "react-icons/bs";
 //import { BsCheckLg } from "react-icons/bs";
 //import { TiDeleteOutline } from "react-icons/ti";
 
-export default function TodoListItem({ todo }) {
+export default function TodoListItem({ todo, onRemove }) {
   const { id, text, checked } = todo;
 
   return (
@@ -20,8 +20,12 @@ export default function TodoListItem({ todo }) {
       >
         {text}
       </Text>
-      {/* <Remove onClick={() => onRemove(id)}> */}
-      <TiDelete />
+      <TiDelete
+        cursor="pointer"
+        onClick={() => {
+          onRemove(id);
+        }}
+      />
     </ItemWrapper>
   );
 }
@@ -36,6 +40,4 @@ const ItemWrapper = styled.div`
 const CheckBox = styled.div`
   cursor: pointer;
 `;
-const Text = styled.div`
-  text-decoration: ;
-`;
+const Text = styled.div``;
