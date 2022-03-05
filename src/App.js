@@ -7,8 +7,8 @@ import TodoList from "./page/TodoList";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-  console.log(todos);
   const nextId = useRef(0);
+  console.log(todos);
 
   const onInsertTodo = (text) => {
     const pushTodo = {
@@ -22,6 +22,10 @@ export default function App() {
 
   const onRemove = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const allRemove = () => {
+    setTodos([]);
   };
 
   const onCheck = (id) => {
@@ -39,7 +43,7 @@ export default function App() {
     <>
       <GlobalStyle />
       <TodoTamplate>
-        <InputBox onInsertTodo={onInsertTodo} />
+        <InputBox onInsertTodo={onInsertTodo} allRemove={allRemove} />
         <TodoList todos={todos} onRemove={onRemove} onCheck={onCheck} />
       </TodoTamplate>
     </>

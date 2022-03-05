@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BsCalendar2Check } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 
-export default function InputBox({ onInsertTodo }) {
+export default function InputBox({ onInsertTodo, allRemove }) {
   const [value, setValue] = useState("");
 
   const onChange = (e) => {
@@ -36,7 +36,7 @@ export default function InputBox({ onInsertTodo }) {
           onChange={onChange}
           autoFocus
         />
-        <ResetButton>
+        <ResetButton onClick={allRemove}>
           <GrPowerReset />
         </ResetButton>
         <PushButton type="button" onClick={onSubmit}>
