@@ -6,19 +6,14 @@ import List from "./List";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { useRecoilState } from "recoil";
+import { listState, textState } from "./state";
 
 const TodoList = () => {
-  const [list, setList] = useState([]);
-  const [text, setText] = useState("");
-  const inputRef = useRef(null);
+  const [list, setList] = useRecoilState(listState);
+  const [text, setText] = useRecoilState(textState);
   const [modalIsopen, setModalIsopen] = useState(false);
+  const inputRef = useRef(null);
   const customStyles = {
     content: {
       top: "50%",
@@ -32,19 +27,13 @@ const TodoList = () => {
 
   const addList = () => {
     let helper = [...list];
-    helper.push(text);
-    setList(helper);
     setText("");
     inputRef.current.focus();
-    text === "" && setModalIsopen(true);
+    text === "" ? setModalIsopen(true) : helper.push(text) && setList(helper);
   };
 
   const allDeleteList = () => {
     setList([]);
-  };
-
-  const deleteList = (key) => {
-    setList(list.filter((element, index) => index !== key));
   };
 
   return (
@@ -56,7 +45,7 @@ const TodoList = () => {
             리셋
           </Reset>
         </Header>
-        <List list={list} deleteList={deleteList} />
+        <List />
         <Content className="content">
           <Input
             onChange={(e) => {

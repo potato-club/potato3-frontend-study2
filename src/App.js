@@ -1,9 +1,12 @@
-import './App.css';
-import TodoList from './page/TodoList';
+import "./App.css";
+import TodoList from "./page/TodoList";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
-    <TodoList />
+    <RecoilRoot>
+      <TodoList />
+    </RecoilRoot>
   );
 }
 

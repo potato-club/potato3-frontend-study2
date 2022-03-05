@@ -1,8 +1,11 @@
 import React from "react";
 import ListItem from "./ListItem";
 import styled from "@emotion/styled";
+import { listState } from "./state";
+import { useRecoilValue } from "recoil";
 
-const List = ({ list, deleteList }) => {
+const List = () => {
+  const list = useRecoilValue(listState);
   return (
     <ListWrap>
       <ListUl>
@@ -11,7 +14,6 @@ const List = ({ list, deleteList }) => {
             key={index}
             itemIndex={index}
             value={element}
-            deleteList={deleteList}
           />
         ))}
       </ListUl>
