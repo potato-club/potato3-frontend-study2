@@ -3,19 +3,3 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-.trash {
-  position: absolute;
-  right: 30px;
-}
-
-.deleteModal {
-  position: absolute;
-  right: -9px;
-  bottom: 45px;
-  font-size: 29px;
-}
-
-.deleteModal:hover {
-  color:lightslategray;
-}

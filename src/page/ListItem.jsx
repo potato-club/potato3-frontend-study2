@@ -15,7 +15,7 @@ const ListItem = ({ itemIndex, value }) => {
   return (
     <ListLi>
       {value}
-      <FontAwesomeIcon
+      <CustomFontAwesomeIcon
         icon={faTrash}
         className="trash"
         onClick={() => deleteList(itemIndex)}
@@ -28,4 +28,9 @@ export default ListItem;
 
 const ListLi = styled.li`
   padding: 10px 10px;
+`;
+
+const CustomFontAwesomeIcon = styled(FontAwesomeIcon)`
+  position: absolute;
+  right: 30px;
 `;

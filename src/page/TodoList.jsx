@@ -22,14 +22,14 @@ const TodoList = () => {
       bottom: "auto",
       transform: "translate(-50%, -50%)",
       overflow: "visible",
-    },
+    }
   };
 
   const addList = () => {
-    let helper = [...list];
+    let temp = [...list];
     setText("");
     inputRef.current.focus();
-    text === "" ? setModalIsopen(true) : helper.push(text) && setList(helper);
+    text === "" ? setModalIsopen(true) : temp.push(text) && setList(temp);
   };
 
   const allDeleteList = () => {
@@ -66,7 +66,7 @@ const TodoList = () => {
           shouldCloseOnOverlayClick={false}
         >
           내용을 입력해주세요 !!
-          <FontAwesomeIcon
+          <CustomFontAwesomeIcon
             icon={faXmark}
             onClick={() => setModalIsopen(false)}
             className="deleteModal"
@@ -132,4 +132,14 @@ const Input = styled.input`
   width: 100%;
   height: 100%;
   border: none;
+`;
+
+const CustomFontAwesomeIcon = styled(FontAwesomeIcon)`
+  position: absolute;
+  right: -9px;
+  bottom: 45px;
+  font-size: 29px;
+  :hover {
+    color: lightslategray;
+  }
 `;
